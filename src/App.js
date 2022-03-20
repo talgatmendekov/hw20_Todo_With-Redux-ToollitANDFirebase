@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from 'react'
+import AddTodo from './components/todo/AddTodo';
+import { useDispatch, useSelector } from 'react-redux'
+import TodoList from './components/todo/TodoList';
+import {getTodos} from './store/todoSlice'
+import Loader from './UI/Loader';
+
 
 function App() {
+  const {status} = useSelector(state => state.todo)
+  const  dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getTodos())
+  }, [dispatch])
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo App</h1>
+       <AddTodo/>
+       {status === 'loading' && <Loader/>}
+     <TodoList/>
     </div>
   );
 }
