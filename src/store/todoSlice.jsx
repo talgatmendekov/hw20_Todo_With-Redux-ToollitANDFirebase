@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
 import { BASE_URL } from '../helpers/constants'
 
-export const getTodos = createAsyncThunk('todos/getTodos', async function (_, {RejectedWithValue}) {
+export const getTodos = createAsyncThunk('todos/getTodos', async function (_, {rejectWithValue}) {
 	try {
 		const response = await fetch(`${BASE_URL}/todos.json`)
 		if (!response.ok) {
@@ -14,6 +14,7 @@ export const getTodos = createAsyncThunk('todos/getTodos', async function (_, {R
 		for (const key in data) {
 			todoData.push({
 				title: data[key].title,
+				date: data[key].date,
 				completed: data[key].completed,
 				id: key,
 			})
@@ -21,7 +22,7 @@ export const getTodos = createAsyncThunk('todos/getTodos', async function (_, {R
 		
 		return todoData
 	} catch (error) {
-        return RejectedWithValue(error.message)
+        return rejectWithValue(error.message)
     }
 });
 
@@ -32,6 +33,7 @@ export const addNewTodo = createAsyncThunk(
         try {
             const todo = {
                 title: todoTitle,
+				date: new Date().toLocaleDateString(),
                 completed: false,
                  
             }
@@ -123,7 +125,6 @@ const todoSlice = createSlice({
 	initialState: initState,
 	reducers: {
 		addTodo(state, action) {
-			console.log(action.payload)
 			const newTodo = action.payload
 			state.todos = [...state.todos, newTodo]
 		},
@@ -155,6 +156,7 @@ const todoSlice = createSlice({
 			state.error = null
 			state.todos = [...state.todos, action.payload]
 		},
+		
 		[getTodos.pending]: (state) => {
 			state.status = 'loading'
 			state.error = null
@@ -163,6 +165,7 @@ const todoSlice = createSlice({
 			state.status = 'resolved'
 			state.todos = action.payload
 		},
+		
 		[deleteTodo.pending]: (state) => {
 			state.status = 'resolved'
 			state.error = null

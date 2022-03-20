@@ -30,7 +30,7 @@ const StyledTodoList = styled.ul`
 		margin:0.5rem 0;
 		padding: 0.5rem;
 		display:flex;
-		justify-content:space-around;
+		justify-content:space-between;
 		border-radius: 5px;
 	}
 `

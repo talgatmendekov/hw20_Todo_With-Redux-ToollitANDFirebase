@@ -44,15 +44,19 @@ const StyledCard = styled.div`
 	background: rgb(175, 172, 174);
 	box-shadow: 0 2px 8px #222222;
 	border-radius: 15px;
+	padding: 1rem;
+	margin: 1rem;
 	.alert{
 		text-align: left;
 		color: red;
-		margin-bottom: 10px;
+		margin-bottom: 1rem;
 		padding:0;
 	}
 	input {
 		width: 200px;
+		border-radius: 10px;
 		padding: 0.25rem 0.25rem;
+		border-color: whitesmoke;
 	}
 	button {
 		width: 15%;

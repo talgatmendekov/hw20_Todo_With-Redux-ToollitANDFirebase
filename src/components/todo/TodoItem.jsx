@@ -29,9 +29,12 @@ const TodoItem = (props) => {
 }
 
 const StyledLi = styled.li`
+	background-color: grey;
+	
 	span {
 		text-decoration: ${(props) => (props.checked ? 'line-through' : '')};
-		text-decoration-color: ${props => props.checked ? 'red' : ''}
+		text-decoration-color: ${props => props.checked ? 'red' : ''};
+		font-weight: 700;
 	}
 	button {
 		background-color: grey;

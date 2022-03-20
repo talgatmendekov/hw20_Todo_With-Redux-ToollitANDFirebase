@@ -8,7 +8,8 @@ import Loader from './UI/Loader';
 
 
 function App() {
-  const {status} = useSelector(state => state.todo)
+  const {status , error} = useSelector(state => state.todo)
+  console.log(error)
   const  dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,9 +21,11 @@ function App() {
       <h1>Todo App</h1>
        <AddTodo/>
        {status === 'loading' && <Loader/>}
+       {error && <h2>An error occured: {error}</h2>}
      <TodoList/>
     </div>
   );
 }
+
 
 export default App;
